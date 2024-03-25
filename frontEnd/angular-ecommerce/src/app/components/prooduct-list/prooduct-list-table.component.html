@@ -1,0 +1,24 @@
+<table class="table">
+  <thead class="table-dark">
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Units in Stock</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(tempProduct of products; track tempProduct) {
+    <tr class="align-middle">
+      <td>
+        <img src="{{ tempProduct.imageUrl }}" height="50" />
+      </td>
+      <td class="align-middle">{{ tempProduct.name }}</td>
+      <td class="align-middle">
+        {{ tempProduct.unitPrice | currency : "USD" }}
+      </td>
+      <td class="align-middle">{{ tempProduct.unitsInStocks }}</td>
+    </tr>
+    }
+  </tbody>
+</table>
