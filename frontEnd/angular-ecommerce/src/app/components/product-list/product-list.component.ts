@@ -24,7 +24,7 @@ export class ProductListComponent {
     if (hasCategoryId) {
       this.currentCategoryId = +this.route.snapshot.paramMap.get('id')!;
     }
-    console.log(this.currentCategoryId);
+
     this.productService.getProductList(this.currentCategoryId).subscribe(
       data=> {
         this.products = data;
