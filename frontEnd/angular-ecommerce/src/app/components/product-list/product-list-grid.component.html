@@ -5,8 +5,12 @@
         @for (tempProduct of products; track tempProduct) {
         <div class="col-md-3">
           <div class="product-box">
-            <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
-            <h1>{{ tempProduct.name }}</h1>
+            <a routerLink="/products/{{ tempProduct.id }}">
+              <img src="{{ tempProduct.imageUrl }}" class="img-responsive" />
+            </a>
+            <a routerLink="/products/{{ tempProduct.id }}">
+              <h1>{{ tempProduct.name }}</h1>
+            </a>
             <div class="price">
               {{ tempProduct.unitPrice | currency : "USD" }}
             </div>
@@ -19,6 +23,45 @@
         </div>
         }
       </div>
+
+      <!-- pagenation -->
+      <div class="footer-pagination">
+        <div class="row">
+          <div class="col-md">
+            <div class="row">
+              <div class="col-md-6"></div>
+              <div class="col-md-9" style="padding-left: 30%">
+                <ngb-pagination
+                  [(page)]="thePageNumber"
+                  [pageSize]="thePageSize"
+                  [collectionSize]="theTotalElements"
+                  [maxSize]="5"
+                  [boundaryLinks]="true"
+                  (pageChange)="listProducts()"
+                >
+                </ngb-pagination>
+              </div>
+
+              <div class="col-md mt" style="text-align: right">
+                <div class="row">
+                  <span class="col-md-5">Page Size: </span>
+                  <select
+                    class="col-md-4"
+                    #myPageSelect
+                    (change)="updatePageSize(myPageSelect.value)"
+                  >
+                    <option selected="true">5</option>
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end pagenation -->
     </div>
   </div>
 </div>
