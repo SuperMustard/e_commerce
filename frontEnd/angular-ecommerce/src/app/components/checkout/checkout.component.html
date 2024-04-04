@@ -42,8 +42,13 @@
             <div class="col-md-2"><label>Country</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country">
-                  <option>TO DO</option>
+                <select
+                  formControlName="country"
+                  (change)="getStates('shippingAddress')"
+                >
+                  @for(country of countries; track country.id) {
+                  <option>{{ country.name }}</option>
+                  }
                 </select>
               </div>
             </div>
@@ -72,7 +77,9 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option>TO DO</option>
+                  @for(state of shippingStates; track state.name) {
+                  <option>{{ state.name }}</option>
+                  }
                 </select>
               </div>
             </div>
@@ -108,8 +115,13 @@
             <div class="col-md-2"><label>Country</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="country">
-                  <option>TO DO</option>
+                <select
+                  formControlName="country"
+                  (change)="getStates('billingAddress')"
+                >
+                  @for(country of countries; track country.id) {
+                  <option>{{ country.name }}</option>
+                  }
                 </select>
               </div>
             </div>
@@ -138,7 +150,9 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="state">
-                  <option>TO DO</option>
+                  @for(state of billingStates; track state.name) {
+                  <option>{{ state.name }}</option>
+                  }
                 </select>
               </div>
             </div>
@@ -202,7 +216,9 @@
             <div class="col-md-9">
               <div class="input-space">
                 <select formControlName="expirationMonth">
-                  <option>TO DO</option>
+                  @for(tempMonth of creditCardMonths; track tempMonth) {
+                  <option>{{ tempMonth }}</option>
+                  }
                 </select>
               </div>
             </div>
@@ -212,8 +228,13 @@
             <div class="col-md-2"><label>Expiration Year</label></div>
             <div class="col-md-9">
               <div class="input-space">
-                <select formControlName="expirationYear">
-                  <option>TO DO</option>
+                <select
+                  formControlName="expirationYear"
+                  (change)="handleMonthsAndYears()"
+                >
+                  @for(tempYear of creditCardYears; track tempYear) {
+                  <option>{{ tempYear }}</option>
+                  }
                 </select>
               </div>
             </div>

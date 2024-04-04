@@ -43,12 +43,14 @@
                 </div>
               </div>
             </div>
-            <button
-              class="btn btn-primary btn-sm mt-2"
-              (click)="remove(tempProduct)"
-            >
-              Remove
-            </button>
+            <div>
+              <button
+                class="btn btn-primary btn-sm"
+                (click)="remove(tempProduct)"
+              >
+                Remove
+              </button>
+            </div>
             <p class="mt-2">
               Subtotal:
               {{
@@ -63,9 +65,14 @@
           <td style="font-weight: bold">
             <p>Total Quantity: {{ totalQuantity }}</p>
             <p>Total Price: {{ totalPrice | currency : "USD" }}</p>
-            <a routerLink="/checkout" class="btn btn-primary btn-sm"
-              >checkout</a
-            >
+            <div>
+              <a
+                routerLink="/checkout"
+                type="button"
+                class="btn btn-primary btn-sm"
+                >checkout</a
+              >
+            </div>
           </td>
         </tr>
       </table>

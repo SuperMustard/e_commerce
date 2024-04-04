@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ShopformService } from '../../services/shopform.service';
+import { throwError } from 'rxjs';
+import { Countries } from '../../common/countries';
+import { States } from '../../common/states';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +16,15 @@ export class CheckoutComponent {
   totalPrice: number = 0;
   totalQuantity: number = 0;
   
-  constructor(private formBuilder: FormBuilder) { }
+  creditCardYears: number[] = [];
+  creditCardMonths: number[] = [];
+
+  countries: Countries[] = [];
+  shippingStates: States[] = [];
+  billingStates: States[] = [];
+
+  constructor(private formBuilder: FormBuilder,
+    private shopFormService: ShopformService) { }
 
   ngOnInit(): void {
     
@@ -45,6 +57,38 @@ export class CheckoutComponent {
         expirationYear: ['']
       })
     });
+
+    const startMonth: number = new Date().getMonth() + 1;
+
+    this.shopFormService.getCreditCardMonths(startMonth).subscribe(data => this.creditCardMonths = data);
+
+    this.shopFormService.getCreditCardYears().subscribe(
+      data => this.creditCardYears = data
+    );
+    
+    this.shopFormService.getCountries().subscribe(data => this.countries = data);
+  }
+
+  getStates(formName: string) {
+    const modifiedFormGroup = this.checkoutFormGroup.get(formName);
+    if (modifiedFormGroup) {
+      const countryName = modifiedFormGroup.value.country;
+      const countryIndex = this.countries.findIndex(item => item.name === countryName);
+      if (countryIndex > -1) {
+        const countryCode = this.countries[countryIndex].code;
+        this.shopFormService.getStates(countryCode).subscribe(
+          data => {
+            if (formName === 'shippingAddress') {
+              this.shippingStates = data;
+            } else {
+              this.billingStates = data;
+            }
+  
+            modifiedFormGroup.get('state')?.setValue(data[0]);
+          }
+        );
+      }
+    }
   }
 
   copyShippingAddressToBillingAddress(event: any) {
@@ -54,12 +98,32 @@ export class CheckoutComponent {
       this.checkoutFormGroup.controls.billingAddress
       //@ts-ignore: Object is possibly 'null'
             .setValue(this.checkoutFormGroup.controls.shippingAddress.value);
+      
+      this.billingStates = this.shippingStates;
     }
     else {
       //@ts-ignore: Object is possibly 'null'
       this.checkoutFormGroup.controls.billingAddress.reset();
+      this.billingStates = [];
     }
     
+  }
+
+  handleMonthsAndYears() {
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+    if (creditCardFormGroup === null) {
+      return;
+    }
+
+    const selectYear: number = Number(creditCardFormGroup!.value.expirationYear);
+    const currentYear: number = new Date().getFullYear();
+
+    let startMonth: number = 1;
+    if (selectYear === currentYear) {
+      startMonth = new Date().getMonth() + 1;
+    }
+
+    this.shopFormService.getCreditCardMonths(startMonth).subscribe(data => this.creditCardMonths = data);
   }
 
   onSubmit() {
