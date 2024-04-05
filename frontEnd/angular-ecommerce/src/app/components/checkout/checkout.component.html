@@ -11,6 +11,17 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="firstName" type="text" />
+                @if(firstName?.invalid && (firstName?.dirty ||
+                firstName?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if(firstName?.errors!['required'] ||
+                  firstName?.errors!['notOnlyWhitespace']) {
+                  <div>First Name is required</div>
+                  } @if(firstName?.errors!['minlength']) {
+                  <div>First Name must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -20,6 +31,17 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="lastName" type="text" />
+                @if(lastName?.invalid && (lastName?.dirty || lastName?.touched))
+                {
+                <div class="alert alert-danger mt-1">
+                  @if(lastName?.errors!['required'] ||
+                  lastName?.errors!['notOnlyWhitespace']) {
+                  <div>Last Name is required</div>
+                  } @if(lastName?.errors!['minlength']) {
+                  <div>Last Name must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -29,6 +51,15 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="email" type="text" />
+                @if(email?.invalid && (email?.dirty || email?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if(email?.errors!['required']) {
+                  <div>Email is required</div>
+                  } @if(email?.errors!['pattern']) {
+                  <div>Email must be a valid value</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -50,6 +81,16 @@
                   <option>{{ country.name }}</option>
                   }
                 </select>
+
+                @if(shippingAddressCountry?.invalid &&
+                (shippingAddressCountry?.dirty ||
+                shippingAddressCountry?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if(shippingAddressCountry?.errors!['required']) {
+                  <div>Country is required</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -59,6 +100,18 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="street" type="text" />
+                @if(shippingAddressStreet?.invalid &&
+                (shippingAddressStreet?.dirty ||
+                shippingAddressStreet?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (shippingAddressStreet?.errors!['required'] ||
+                  shippingAddressStreet?.errors!['notOnlyWhitespace']) {
+                  <div>Street is required</div>
+                  } @if (shippingAddressStreet?.errors!['minlength']) {
+                  <div>Street must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -68,6 +121,18 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="city" type="text" />
+
+                @if (shippingAddressCity?.invalid && (shippingAddressCity?.dirty
+                || shippingAddressCity?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (shippingAddressCity?.errors!['required'] ||
+                  shippingAddressCity?.errors!['notOnlyWhitespace']) {
+                  <div>City is required</div>
+                  } @if (shippingAddressCity?.errors!['minlength']) {
+                  <div>City must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -81,6 +146,16 @@
                   <option>{{ state.name }}</option>
                   }
                 </select>
+
+                @if (shippingAddressState?.invalid &&
+                (shippingAddressState?.dirty || shippingAddressState?.touched))
+                {
+                <div class="alert alert-danger mt-1">
+                  @if (shippingAddressState?.errors!['required']) {
+                  <div>State is required</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -90,6 +165,19 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="zipCode" type="text" />
+
+                @if (shippingAddressZipCode?.invalid &&
+                (shippingAddressZipCode?.dirty ||
+                shippingAddressZipCode?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (shippingAddressZipCode?.errors!['required'] ||
+                  shippingAddressZipCode?.errors!['notOnlyWhitespace']) {
+                  <div>Zip code is required</div>
+                  } @if (shippingAddressZipCode?.errors!['minlength']) {
+                  <div>Zip code must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -123,6 +211,16 @@
                   <option>{{ country.name }}</option>
                   }
                 </select>
+
+                @if(billingAddressCountry?.invalid &&
+                (billingAddressCountry?.dirty ||
+                billingAddressCountry?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if(billingAddressCountry?.errors!['required']) {
+                  <div>Country is required</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -132,6 +230,19 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="street" type="text" />
+
+                @if(billingAddressStreet?.invalid &&
+                (billingAddressStreet?.dirty || billingAddressStreet?.touched))
+                {
+                <div class="alert alert-danger mt-1">
+                  @if (billingAddressStreet?.errors!['required'] ||
+                  billingAddressStreet?.errors!['notOnlyWhitespace']) {
+                  <div>Street is required</div>
+                  } @if (billingAddressStreet?.errors!['minlength']) {
+                  <div>Street must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -141,6 +252,18 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="city" type="text" />
+
+                @if (billingAddressCity?.invalid && (billingAddressCity?.dirty
+                || billingAddressCity?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (billingAddressCity?.errors!['required'] ||
+                  billingAddressCity?.errors!['notOnlyWhitespace']) {
+                  <div>City is required</div>
+                  } @if (billingAddressCity?.errors!['minlength']) {
+                  <div>City must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -154,6 +277,15 @@
                   <option>{{ state.name }}</option>
                   }
                 </select>
+
+                @if (billingAddressState?.invalid && (billingAddressState?.dirty
+                || billingAddressState?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (billingAddressState?.errors!['required']) {
+                  <div>State is required</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -163,6 +295,19 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="zipCode" type="text" />
+
+                @if (billingAddressZipCode?.invalid &&
+                (billingAddressZipCode?.dirty ||
+                billingAddressZipCode?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (billingAddressZipCode?.errors!['required'] ||
+                  billingAddressZipCode?.errors!['notOnlyWhitespace']) {
+                  <div>Zip code is required</div>
+                  } @if (billingAddressZipCode?.errors!['minlength']) {
+                  <div>Zip code must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -180,6 +325,15 @@
                   <option>Visa</option>
                   <option>Mastercard</option>
                 </select>
+
+                @if (creditCardType?.invalid && (creditCardType?.dirty ||
+                creditCardType?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (creditCardType?.errors!['required']) {
+                  <div>Credit card type is required</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -189,6 +343,19 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="nameOnCard" type="text" />
+
+                @if (creditCardNameOnCard?.invalid &&
+                (creditCardNameOnCard?.dirty || creditCardNameOnCard?.touched))
+                {
+                <div class="alert alert-danger mt-1">
+                  @if (creditCardNameOnCard?.errors!['required'] ||
+                  creditCardNameOnCard?.errors!['notOnlyWhitespace']) {
+                  <div>Name is required</div>
+                  } @if (creditCardNameOnCard?.errors!['minlength']) {
+                  <div>Name must be at least 2 characters long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -198,6 +365,17 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="cardNumber" type="text" />
+
+                @if (creditCardNumber?.invalid && (creditCardNumber?.dirty ||
+                creditCardNumber?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (creditCardNumber?.errors!['required']) {
+                  <div>Card number is required</div>
+                  } @if (creditCardNumber?.errors!['pattern']) {
+                  <div>Card number must be 16 digits long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -207,6 +385,18 @@
             <div class="col-md-9">
               <div class="input-space">
                 <input formControlName="securityCode" type="text" />
+
+                @if (creditCardSecurityCode?.invalid &&
+                (creditCardSecurityCode?.dirty ||
+                creditCardSecurityCode?.touched)) {
+                <div class="alert alert-danger mt-1">
+                  @if (creditCardSecurityCode?.errors!['required']) {
+                  <div>Security code is required</div>
+                  } @if (creditCardSecurityCode?.errors!['pattern']) {
+                  <div>Security code must be 3 digits long</div>
+                  }
+                </div>
+                }
               </div>
             </div>
           </div>
