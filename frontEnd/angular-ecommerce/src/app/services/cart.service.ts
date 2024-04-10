@@ -12,7 +12,25 @@ export class CartService {
   totalPrice: Subject<number> = new BehaviorSubject<number>(0);
   totalQuantity: Subject<number> = new BehaviorSubject<number>(0);
 
-  constructor() { }
+  //storage: Storage = sessionStorage;
+  storage: Storage = localStorage;
+
+  constructor() {
+    const dataText = this.storage.getItem('cartItems');
+
+    if (dataText !== null) {
+      console.log(dataText);
+      const data = JSON.parse(dataText);
+      this.cartItems = data;
+
+      this.computeCartTotals();
+    }
+  }
+
+  persistCartItems() {
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
+
+  }
 
   addToCart(theCartItem: CartItem) {
     // check if we already have the item
@@ -32,6 +50,7 @@ export class CartService {
     }
     
     this.computeCartTotals();
+    this.persistCartItems();
   }
 
   decreseQuantity(theCartItem: CartItem) {
