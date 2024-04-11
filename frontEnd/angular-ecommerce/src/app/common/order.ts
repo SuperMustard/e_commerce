@@ -1,6 +1,6 @@
 export class Order {
     constructor(
-        totalQuantity: number,
-        totalPrice: number
+        public totalQuantity: number,
+        public totalPrice: number
     ) {};
 }

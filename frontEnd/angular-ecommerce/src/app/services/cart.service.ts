@@ -29,7 +29,6 @@ export class CartService {
 
   persistCartItems() {
     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
-
   }
 
   addToCart(theCartItem: CartItem) {

@@ -18,7 +18,11 @@ import { Purchase } from '../../common/purchase';
   styleUrl: './checkout.component.css'
 })
 export class CheckoutComponent {
+  sessionStorage: Storage = sessionStorage;
+
   checkoutFormGroup!: FormGroup;
+
+  localStorage: Storage = localStorage;
 
   totalPrice: number = 0;
   totalQuantity: number = 0;
@@ -39,11 +43,17 @@ export class CheckoutComponent {
   ngOnInit(): void {
     this.updateCartStatus();
 
+    const sessionEmail = this.sessionStorage.getItem('customerEmail');
+    let theEmail : string = '';
+    if (sessionEmail) {
+      theEmail = sessionEmail;
+    }
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhitespace]),
         lastName: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhitespace]),
-        email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
+        email: new FormControl(theEmail, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
         street: new FormControl('', [Validators.required, Validators.minLength(2), ShopValidators.notOnlyWhitespace]),
@@ -194,12 +204,12 @@ export class CheckoutComponent {
       billingAddress.country = billingCountry;
 
       const purchase: Purchase = new Purchase(customer, shippingAddress, billingAddress, order, orderItems);
-      console.log(customer);
-      console.log(shippingAddress);
-      console.log(billingAddress);
-      console.log(order);
-      console.log(orderItems);
-      console.log(purchase.customer);
+      // console.log(customer);
+      // console.log(shippingAddress);
+      // console.log(billingAddress);
+      // console.log(order);
+      // console.log(orderItems);
+      // console.log(purchase.customer);
 
       this.checkoutService.placeOrder(purchase).subscribe(
         {
@@ -228,6 +238,8 @@ export class CheckoutComponent {
     this.checkoutFormGroup.reset();
 
     this.router.navigateByUrl('/products');
+
+    this.localStorage.removeItem('cartItems');
     
   }
 }
