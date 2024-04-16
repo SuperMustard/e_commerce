@@ -14,6 +14,8 @@ This is a e-commerce platform. Using Angular for front-end. Using spring-boot fo
 
 
 ### Login Page
+test user: tester@test.com
+password: Yan666Host
 ![image](https://github.com/SuperMustard/e_commerce/assets/6720652/d8c1e4bb-185a-4eb4-b16e-4a2a204ce8cc)
 ![image](https://github.com/SuperMustard/e_commerce/assets/6720652/84707539-71e3-4b11-94e8-3c1168d04c82)
 
