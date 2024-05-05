@@ -9,6 +9,8 @@
   
 This is a e-commerce platform. Using Angular for front-end. Using spring-boot for back-end. And using PostgreSQL for database. It supports search by text, search by category, pagination, and member login (I use Okta as my authorization server). Also, support back-end API URL protection by Okta guard. I also use HTTPS to communicate between different parts.
 
+[preview]([https://link-url-here.org](https://enchanting-lokum-7da55f.netlify.app/products))
+
 ### Main page
 <img width="1258" alt="image" src="https://github.com/SuperMustard/e_commerce/assets/6720652/9d3b8d25-243f-4acd-9a83-f93314dd68cc">
 
